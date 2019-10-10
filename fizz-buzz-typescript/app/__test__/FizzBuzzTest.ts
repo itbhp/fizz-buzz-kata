@@ -1,5 +1,5 @@
 function fizzBuzz(n: number): string {
-  if (n === 3 || n === 6) {
+  if (n % 3 === 0) {
     return 'Fizz';
   }
   return `${n}`;
@@ -19,10 +19,15 @@ describe('FizzBuzz Kata', () => {
       expect(fizzBuzz(4)).toEqual('4');
     });
   });
-  it('should give "Fizz" for 3', () => {
-    expect(fizzBuzz(3)).toEqual('Fizz');
-  });
-  it('should give "Fizz" for 6', () => {
-    expect(fizzBuzz(6)).toEqual('Fizz');
+  describe('fizz numbers', () => {
+    it('should give "Fizz" for 3', () => {
+      expect(fizzBuzz(3)).toEqual('Fizz');
+    });
+    it('should give "Fizz" for 6', () => {
+      expect(fizzBuzz(6)).toEqual('Fizz');
+    });
+    it('should give "Fizz" for 9', () => {
+      expect(fizzBuzz(9)).toEqual('Fizz');
+    });
   });
 });
