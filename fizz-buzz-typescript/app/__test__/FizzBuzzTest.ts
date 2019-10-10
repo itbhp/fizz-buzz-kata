@@ -1,8 +1,5 @@
 function fizzBuzz(n: number): string {
-  if (n === 2) {
-    return '2';
-  }
-  return '1';
+  return `${n}`;
 }
 
 describe('FizzBuzz Kata', () => {
@@ -12,5 +9,9 @@ describe('FizzBuzz Kata', () => {
 
   it('should give "2" for 2', () => {
     expect(fizzBuzz(2)).toEqual('2');
+  });
+
+  it('should give "4" for 4', () => {
+    expect(fizzBuzz(4)).toEqual('4');
   });
 });
