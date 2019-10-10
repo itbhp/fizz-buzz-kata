@@ -6,7 +6,9 @@
 - [X] test 3 -> Fizz
 - [X] test 6 -> Fizz
 - [X] test 9 -> Fizz
-- [ ] test 5 -> Buzz
-- [ ] test 10 -> Buzz
-- [ ] test 20 -> Buzz
-- [ ] test 15 -> FizzBuzz
+- [X] test 5 -> Buzz
+- [X] test 10 -> Buzz
+- [X] test 20 -> Buzz
+- [X] test 15 -> FizzBuzz
+- [X] test 30 -> FizzBuzz
+- [X] test 45 -> FizzBuzz
