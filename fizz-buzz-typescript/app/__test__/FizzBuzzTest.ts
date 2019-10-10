@@ -32,12 +32,9 @@ class ChainSemiGroup implements Semigroup<Transformation> {
   }
 }
 
-function fizzBuzz(number: number): string {
-  const chain = new ChainSemiGroup();
-  // tslint:disable-next-line:max-line-length
-  const kataTransformation = chain.combine(fizzBuzzT, chain.combine(fizz, chain.combine(buzz, identity)));
-  return kataTransformation(number);
-}
+const chain = new ChainSemiGroup();
+
+const fizzBuzz = chain.combine(fizzBuzzT, chain.combine(fizz, chain.combine(buzz, identity)));
 
 describe('FizzBuzz Kata', () => {
   describe('numbers not fizz or buzz', () => {
