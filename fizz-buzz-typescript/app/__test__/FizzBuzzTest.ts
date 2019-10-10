@@ -1,4 +1,7 @@
 function fizzBuzz(n: number): string {
+  if (n % 15 === 0) {
+    return 'FizzBuzz';
+  }
   if (n % 5 === 0) {
     return 'Buzz';
   }
@@ -42,6 +45,17 @@ describe('FizzBuzz Kata', () => {
     });
     it('should give "Buzz" for 20', () => {
       expect(fizzBuzz(20)).toEqual('Buzz');
+    });
+  });
+  describe('fizzBuzzes numbers', () => {
+    it('should give "FizzBuzz" for 15', () => {
+      expect(fizzBuzz(15)).toEqual('FizzBuzz');
+    });
+    it('should give "Buzz" for 30', () => {
+      expect(fizzBuzz(30)).toEqual('FizzBuzz');
+    });
+    it('should give "Buzz" for 45', () => {
+      expect(fizzBuzz(45)).toEqual('FizzBuzz');
     });
   });
 });
