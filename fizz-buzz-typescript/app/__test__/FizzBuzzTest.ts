@@ -76,10 +76,10 @@ describe('FizzBuzz Kata', () => {
     it('should give "FizzBuzz" for 15', () => {
       expect(fizzBuzz(15)).toEqual('FizzBuzz');
     });
-    it('should give "Buzz" for 30', () => {
+    it('should give "FizzBuzz" for 30', () => {
       expect(fizzBuzz(30)).toEqual('FizzBuzz');
     });
-    it('should give "Buzz" for 45', () => {
+    it('should give "FizzBuzz" for 45', () => {
       expect(fizzBuzz(45)).toEqual('FizzBuzz');
     });
   });
