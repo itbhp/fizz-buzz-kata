@@ -1,14 +1,42 @@
-function fizzBuzz(n: number): string {
-  if (n % 15 === 0) {
-    return 'FizzBuzz';
+type Semigroup<T> = {
+  combine(t1: T, t2: T) : T;
+};
+
+type Predicate<T> = (t: T) => boolean;
+
+const fizzPredicate = (num: number) => num % 3 === 0;
+const buzzPredicate = (num: number) => num % 5 === 0;
+
+class AndSemigroup implements Semigroup<Predicate<number>>{
+  combine(t1: Predicate<number>, t2: Predicate<number>) : Predicate<number> {
+    return (n: number) => t1(n) && t2(n);
   }
-  if (n % 5 === 0) {
-    return 'Buzz';
+}
+
+type Transformation = (n: number) => string
+
+const identity: Transformation = (n: number) => `${n}`;
+// tslint:disable-next-line:max-line-length
+const transform =  (p: Predicate<number>) => (placeHolder: string) => (n: number) => p(n) ? placeHolder : '';
+const fizz: Transformation = transform(fizzPredicate)('Fizz');
+const buzz: Transformation = transform(buzzPredicate)('Buzz');
+// tslint:disable-next-line:max-line-length
+const fizzBuzzT: Transformation = transform(new AndSemigroup().combine(fizzPredicate, buzzPredicate))('FizzBuzz');
+
+class ChainSemiGroup implements Semigroup<Transformation> {
+  combine(t1: Transformation, t2: Transformation): Transformation {
+    return (n: number) => {
+      const t1Res = t1(n);
+      return t1Res === '' ? t2(n) : t1Res;
+    };
   }
-  if (n % 3 === 0) {
-    return 'Fizz';
-  }
-  return `${n}`;
+}
+
+function fizzBuzz(number: number): string {
+  const chain = new ChainSemiGroup();
+  // tslint:disable-next-line:max-line-length
+  const kataTransformation = chain.combine(fizzBuzzT, chain.combine(fizz, chain.combine(buzz, identity)));
+  return kataTransformation(number);
 }
 
 describe('FizzBuzz Kata', () => {
