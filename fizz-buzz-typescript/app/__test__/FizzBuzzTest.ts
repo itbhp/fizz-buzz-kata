@@ -36,7 +36,7 @@ const chain : Semigroup<Transformation> = {
   },
 };
 
-const fizzBuzz = chain.combine(chain.combine(fizzBuzzT,fizz), chain.combine(buzz, identity));
+const fizzBuzz = chain.combine(chain.combine(fizzBuzzT, fizz), chain.combine(buzz, identity));
 
 describe('FizzBuzz Kata', () => {
   describe('numbers not fizz or buzz', () => {
