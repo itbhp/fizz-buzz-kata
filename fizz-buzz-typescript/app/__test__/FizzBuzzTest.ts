@@ -11,7 +11,7 @@ type Predicate<T> = (t: T) => boolean;
 const fizzPredicate = (num: number) => num % 3 === 0;
 const buzzPredicate = (num: number) => num % 5 === 0;
 
-const predicateAnd : Semigroup<Predicate<number>> = {
+const semigroupAnd : Semigroup<Predicate<number>> = {
   combine(t1: Predicate<number>, t2: Predicate<number>) : Predicate<number> {
     return (n: number) => t1(n) && t2(n);
   }
@@ -25,7 +25,7 @@ const transform =  (p: Predicate<number>) => (placeHolder: string) => (n: number
 const fizz: Transformation = transform(fizzPredicate)('Fizz');
 const buzz: Transformation = transform(buzzPredicate)('Buzz');
 // tslint:disable-next-line:max-line-length
-const fizzBuzzT: Transformation = transform(predicateAnd.combine(fizzPredicate, buzzPredicate))('FizzBuzz');
+const fizzBuzzT: Transformation = transform(semigroupAnd.combine(fizzPredicate, buzzPredicate))('FizzBuzz');
 
 const chain : Semigroup<Transformation> = {
   combine(t1: Transformation, t2: Transformation): Transformation {
