@@ -4,7 +4,7 @@ interface Magma<T> {
 }
 interface Semigroup<T> extends Magma<T> {
   // it is a magma with associativity law
-};
+}
 
 type Predicate<T> = (t: T) => boolean;
 
@@ -14,10 +14,10 @@ const buzzPredicate = (num: number) => num % 5 === 0;
 const semigroupAnd : Semigroup<Predicate<number>> = {
   combine(t1: Predicate<number>, t2: Predicate<number>) : Predicate<number> {
     return (n: number) => t1(n) && t2(n);
-  }
-}
+  },
+};
 
-type Transformation = (n: number) => string
+type Transformation = (n: number) => string;
 
 const identity: Transformation = (n: number) => `${n}`;
 // tslint:disable-next-line:max-line-length
@@ -33,8 +33,8 @@ const chain : Semigroup<Transformation> = {
       const t1Res = t1(n);
       return t1Res === '' ? t2(n) : t1Res;
     };
-  }
-}
+  },
+};
 
 const fizzBuzz = chain.combine(chain.combine(fizzBuzzT,fizz), chain.combine(buzz, identity));
 
