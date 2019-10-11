@@ -1,5 +1,9 @@
-type Semigroup<T> = {
+
+interface Magma<T> {
   combine(t1: T, t2: T) : T;
+}
+interface Semigroup<T> extends Magma<T> {
+  // it is a magma with associativity law
 };
 
 type Predicate<T> = (t: T) => boolean;
