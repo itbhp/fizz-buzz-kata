@@ -34,7 +34,7 @@ class ChainSemiGroup implements Semigroup<Transformation> {
 
 const chain = new ChainSemiGroup();
 
-const fizzBuzz = chain.combine(fizzBuzzT, chain.combine(fizz, chain.combine(buzz, identity)));
+const fizzBuzz = chain.combine(chain.combine(fizzBuzzT,fizz), chain.combine(buzz, identity));
 
 describe('FizzBuzz Kata', () => {
   describe('numbers not fizz or buzz', () => {
