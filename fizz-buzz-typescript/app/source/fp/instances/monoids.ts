@@ -17,6 +17,5 @@ export const stringMonoid: Monoid<string> = {
     combine(a: string, b: string) {
         return a + b;
     },
-
     identity: ''
 }

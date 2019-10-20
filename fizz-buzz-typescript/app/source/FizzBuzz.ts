@@ -9,10 +9,12 @@ const buzz: (n: number) => Maybe<string> = combinatorFrom(5)('Buzz');
 
 export function fizzBuzz(n: number): string {
 
+  const monoid = maybeOrMonoid(stringMonoid);
   return [fizz, buzz]
     .map(combinator => combinator(n))
     .reduce(
       (acc: Maybe<string>, elem: Maybe<string>) =>
-        maybeOrMonoid(stringMonoid).combine(acc, elem),
+        monoid.combine(acc, elem),
+      monoid.identity
     ).orElse(`${n}`);
 }
