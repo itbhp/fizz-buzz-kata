@@ -5,7 +5,7 @@ export interface Maybe<T> {
   fold<U>(ifEmpty: () => U, ifSome: (t: T) => U): U;
 }
 
-class Some<T> implements Maybe<T> {
+export class Just<T> implements Maybe<T> {
   readonly value: T;
 
   constructor(t: T) {
@@ -13,7 +13,7 @@ class Some<T> implements Maybe<T> {
   }
 
   map<U>(f: (t: T) => U): Maybe<U> {
-    return new Some(f(this.value));
+    return new Just(f(this.value));
   }
 
   flatMap<U>(f: (t: T) => Maybe<U>): Maybe<U> {
@@ -29,7 +29,7 @@ class Some<T> implements Maybe<T> {
   }
 }
 
-class None<T> implements Maybe<T> {
+export class None<T> implements Maybe<T> {
   public static readonly instance: Maybe<any> = new None();
 
   map<U>(f: (t: T) => U): Maybe<U> {
@@ -49,5 +49,5 @@ class None<T> implements Maybe<T> {
   }
 }
 
-export const some: <T>(t: T) => Maybe<T> = <T>(t: T) => new Some(t);
+export const just: <T>(t: T) => Maybe<T> = <T>(t: T) => new Just(t);
 export const none: <T>() => Maybe<T> = () => None.instance;
