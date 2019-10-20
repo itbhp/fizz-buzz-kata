@@ -6,14 +6,14 @@ const combinatorFrom =
 const fizz: (n: number) => Maybe<string> = combinatorFrom(3)('Fizz');
 const buzz: (n: number) => Maybe<string> = combinatorFrom(5)('Buzz');
 const combinators = [fizz, buzz];
+const combinatorsMonoid = maybeOrMonoid(stringMonoid);
 
 export function fizzBuzz(n: number): string {
-  const monoid = maybeOrMonoid(stringMonoid);
   return combinators
     .map(combinator => combinator(n))
     .reduce(
       (acc: Maybe<string>, elem: Maybe<string>) =>
-        monoid.combine(acc, elem),
-      monoid.identity
+        combinatorsMonoid.combine(acc, elem),
+      combinatorsMonoid.identity
     ).orElse(`${n}`);
 }
