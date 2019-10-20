@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "test": "NODE_ENV=test jest --no-cache",
+    "test": "NODE_ENV=test jest --no-cache --watch",
     "build": "tsc",
     "lint:staged": "lint-staged && git add app",
     "start": "npm run build && node dist/source/main.js"
