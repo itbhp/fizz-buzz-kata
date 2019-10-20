@@ -10,7 +10,9 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "@types/deep-equal": "^1.0.1",
     "@types/jest": "24.0.13",
+    "deep-equal": "^1.1.0",
     "jest": "24.6.0",
     "lint-staged": "8.1.1",
     "ts-jest": "24.0.2",
