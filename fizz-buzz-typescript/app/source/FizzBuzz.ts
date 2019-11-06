@@ -1,19 +1,15 @@
 import { Maybe, just, none } from "./fp/types/Maybe";
 import { maybeOrMonoid, stringMonoid } from "./fp/instances/monoids";
 
-const combinatorFrom = 
+const from = 
  (divisor: number) => (word: string) => (n: number) => n % divisor === 0 ? just(word) : none<string>();
-const fizz: (n: number) => Maybe<string> = combinatorFrom(3)('Fizz');
-const buzz: (n: number) => Maybe<string> = combinatorFrom(5)('Buzz');
-const combinators = [fizz, buzz];
-const combinatorsMonoid = maybeOrMonoid(stringMonoid);
+const fizz: (n: number) => Maybe<string> = from(3)('Fizz');
+const buzz: (n: number) => Maybe<string> = from(5)('Buzz');
 
 export function fizzBuzz(n: number): string {
-  return combinators
-    .map(combinator => combinator(n))
-    .reduce(
-      (acc: Maybe<string>, elem: Maybe<string>) =>
-        combinatorsMonoid.combine(acc, elem),
-      combinatorsMonoid.identity
-    ).orElse(`${n}`);
+  const byFirst = (acc: Maybe<string>, elem: Maybe<string>) => maybeOrMonoid(stringMonoid).combine(acc, elem);
+  const initialAcc = maybeOrMonoid(stringMonoid).identity;
+  return [fizz, buzz]
+    .map(transform => transform(n))
+    .reduce(byFirst, initialAcc).orElse(`${n}`);
 }
