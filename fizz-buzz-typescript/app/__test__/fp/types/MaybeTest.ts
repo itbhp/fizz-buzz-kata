@@ -14,7 +14,7 @@ describe('Maybe', () => {
     expect(just(4).flatMap(n => n % 3 == 0 ? just('Odd') : none())).toEqual(none())
   });
 
-  it('has foldable api', () => {
+  it('has fold api', () => {
     expect(just(3).fold(() => 'empty', (n:number) => `value ${n}`)).toEqual('value 3')
     expect(none().fold(() => 'empty', (n:number) => `value ${n}`)).toEqual('empty')
   });
