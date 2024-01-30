@@ -1,42 +1,31 @@
-
-interface Magma<T> {
+interface Semigroup<T> {
   combine(t1: T, t2: T) : T;
-}
-interface Semigroup<T> extends Magma<T> {
-  // it is a magma with associativity law
 }
 
 type Predicate<T> = (t: T) => boolean;
+type Transformation = (n: number) => string;
 
 const fizzPredicate = (num: number) => num % 3 === 0;
 const buzzPredicate = (num: number) => num % 5 === 0;
 
-const semigroupAnd : Semigroup<Predicate<number>> = {
-  combine(t1: Predicate<number>, t2: Predicate<number>) : Predicate<number> {
-    return (n: number) => t1(n) && t2(n);
-  },
-};
-
-type Transformation = (n: number) => string;
-
-const identity: Transformation = (n: number) => `${n}`;
-// tslint:disable-next-line:max-line-length
-const transform =  (p: Predicate<number>) => (placeHolder: string) => (n: number) => p(n) ? placeHolder : '';
-const fizz: Transformation = transform(fizzPredicate)('Fizz');
-const buzz: Transformation = transform(buzzPredicate)('Buzz');
-// tslint:disable-next-line:max-line-length
-const fizzBuzzT: Transformation = transform(semigroupAnd.combine(fizzPredicate, buzzPredicate))('FizzBuzz');
-
-const chain : Semigroup<Transformation> = {
+const transformationSemigroup : Semigroup<Transformation> = {
   combine(t1: Transformation, t2: Transformation): Transformation {
     return (n: number) => {
-      const t1Res = t1(n);
-      return t1Res === '' ? t2(n) : t1Res;
+      return t1(n) + t2(n);
     };
   },
 };
 
-const fizzBuzz = chain.combine(chain.combine(fizzBuzzT, fizz), chain.combine(buzz, identity));
+const transform =  (p: Predicate<number>) => (placeHolder: string) => (n: number) => p(n) ? placeHolder : '';
+const fizz: Transformation = transform(fizzPredicate)('Fizz');
+const buzz: Transformation = transform(buzzPredicate)('Buzz');
+
+
+const fizzBuzz = (n: number) =>{
+  const fizzBuzzTransformation = transformationSemigroup.combine(fizz, buzz);
+  const result = fizzBuzzTransformation(n);
+  return result == '' ? `${n}` : result;
+}
 
 describe('FizzBuzz Kata', () => {
   describe('numbers not fizz or buzz', () => {
