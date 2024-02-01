@@ -9,9 +9,9 @@ const fizz: Rule = from(3)('Fizz');
 const buzz: Rule = from(5)('Buzz');
 
 export function fizzBuzz(n: number): string {
-  const byFirst = (acc: Maybe<string>, elem: Maybe<string>) => maybeOrMonoid(stringMonoid).combine(acc, elem);
+  const byCombiningWhenMatch = (acc: Maybe<string>, elem: Maybe<string>) => maybeOrMonoid(stringMonoid).combine(acc, elem);
   const initialAcc = maybeOrMonoid(stringMonoid).identity;
   return [fizz, buzz]
     .map(transform => transform(n))
-    .reduce(byFirst, initialAcc).orElse(`${n}`);
+    .reduce(byCombiningWhenMatch, initialAcc).orElse(`${n}`);
 }
