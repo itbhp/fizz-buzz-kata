@@ -1,5 +1,5 @@
 interface Semigroup<T> {
-    combine(t1: T, t2: T): T;
+    combine(t1: T, t2: T): T; // it should be an associative operation
 }
 
 type Predicate<T> = (t: T) => boolean;
