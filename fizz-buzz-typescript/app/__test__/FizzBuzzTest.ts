@@ -16,9 +16,9 @@ const transformationSemigroup: Semigroup<Transformation> = {
     },
 };
 
-const transform = (p: Predicate<number>) => (placeHolder: string) => (n: number) => p(n) ? placeHolder : '';
-const fizz: Transformation = transform(fizzPredicate)('Fizz');
-const buzz: Transformation = transform(buzzPredicate)('Buzz');
+const whenMatched = (p: Predicate<number>) => (motto: string) => (n: number) => p(n) ? motto : '';
+const fizz: Transformation = whenMatched(fizzPredicate)('Fizz');
+const buzz: Transformation = whenMatched(buzzPredicate)('Buzz');
 
 
 const fizzBuzz = (n: number) => {
